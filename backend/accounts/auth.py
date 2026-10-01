@@ -3,6 +3,7 @@ from datetime import timedelta
 import jwt
 from django.conf import settings
 from django.utils import timezone
+from graphql import GraphQLError
 
 from .models import User
 
@@ -21,3 +22,17 @@ def get_user_from_token(token):
     except jwt.InvalidTokenError:
         return None
     return User.objects.filter(pk=payload.get("user_id"), is_active=True).first()
+
+
+def require_user(info):
+    user = info.context.user
+    if not user.is_authenticated:
+        raise GraphQLError("You must be logged in.")
+    return user
+
+
+def require_manager(info):
+    user = require_user(info)
+    if not user.is_manager:
+        raise GraphQLError("Only managers can do this.")
+    return user
