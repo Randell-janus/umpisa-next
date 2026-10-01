@@ -1,0 +1,4 @@
+Django==5.2.7
+graphene-django==3.2.3
+psycopg[binary]==3.2.10
+PyJWT==2.10.1
