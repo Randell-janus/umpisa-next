@@ -1,7 +1,8 @@
-export default function Home() {
-  return (
-    <main className="flex min-h-screen items-center justify-center">
-      <h1 className="text-2xl font-semibold">Leave Requests</h1>
-    </main>
-  );
+import { redirect } from "next/navigation";
+
+import { homePath, requireUser } from "@/lib/session";
+
+export default async function Home() {
+  const user = await requireUser();
+  redirect(homePath(user));
 }
