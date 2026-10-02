@@ -46,7 +46,7 @@ export default function LeaveTable({
                 <StatusBadge status={request.status} />
               </td>
               <td className="py-3 text-right">
-                <Link href={`${detailPath}/${request.id}`} className="font-medium text-indigo-600">
+                <Link href={`${detailPath}/${request.id}`} className="font-medium text-gray-800 underline">
                   View
                 </Link>
               </td>

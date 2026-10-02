@@ -13,7 +13,7 @@ type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
 
 const selectClasses = [
   "block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm",
-  "focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500",
+  "focus:border-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-800",
 ].join(" ");
 
 export default function Select({ label, name, id = name, options, ...props }: SelectProps) {

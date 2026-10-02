@@ -71,6 +71,8 @@ class Query(graphene.ObjectType):
 
     def resolve_leave_request(self, info, id):
         user = require_user(info)
+        if not id.isdigit():
+            return None
         return (
             LeaveRequest.objects.select_related("employee", "reviewed_by")
             .filter(Q(employee=user) | Q(employee__manager=user), pk=id)

@@ -13,7 +13,13 @@ export default function LoginForm() {
   return (
     <form action={formAction} className="space-y-4">
       <FormError message={state?.error} />
-      <Input label="Username" name="username" autoComplete="username" required />
+      <Input
+        label="Username"
+        name="username"
+        autoComplete="username"
+        defaultValue={state?.username}
+        required
+      />
       <Input
         label="Password"
         name="password"
