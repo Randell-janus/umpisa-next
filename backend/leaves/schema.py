@@ -10,6 +10,7 @@ from . import services
 from .models import LeaveBalance, LeaveRequest, LeaveType
 
 LeaveTypeEnum = graphene.Enum.from_enum(LeaveType)
+LeaveStatusEnum = graphene.Enum.from_enum(LeaveRequest.Status, name="LeaveStatus")
 
 
 def run_service(func, *args, **kwargs):
@@ -59,7 +60,11 @@ class Query(graphene.ObjectType):
     my_balances = graphene.List(graphene.NonNull(LeaveBalanceType), required=True)
     my_leave_requests = graphene.List(graphene.NonNull(LeaveRequestType), required=True)
     leave_request = graphene.Field(LeaveRequestType, id=graphene.ID(required=True))
-    pending_approvals = graphene.List(graphene.NonNull(LeaveRequestType), required=True)
+    team_leave_requests = graphene.List(
+        graphene.NonNull(LeaveRequestType),
+        required=True,
+        status=LeaveStatusEnum(required=True),
+    )
 
     def resolve_my_balances(self, info):
         user = require_user(info)
@@ -79,13 +84,14 @@ class Query(graphene.ObjectType):
             .first()
         )
 
-    def resolve_pending_approvals(self, info):
+    def resolve_team_leave_requests(self, info, status):
         manager = require_manager(info)
-        return (
-            LeaveRequest.objects.select_related("employee")
-            .filter(employee__manager=manager, status=LeaveRequest.Status.PENDING)
-            .order_by("start_date")
+        requests = LeaveRequest.objects.select_related("employee").filter(
+            employee__manager=manager, status=status.value
         )
+        if status.value == LeaveRequest.Status.PENDING:
+            return requests.order_by("start_date")
+        return requests.order_by("-reviewed_at")
 
 
 class FileLeave(graphene.Mutation):
