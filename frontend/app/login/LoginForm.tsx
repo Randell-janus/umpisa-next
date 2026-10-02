@@ -14,7 +14,13 @@ export default function LoginForm() {
     <form action={formAction} className="space-y-4">
       <FormError message={state?.error} />
       <Input label="Username" name="username" autoComplete="username" required />
-      <Input label="Password" name="password" type="password" autoComplete="current-password" required />
+      <Input
+        label="Password"
+        name="password"
+        type="password"
+        autoComplete="current-password"
+        required
+      />
       <Button type="submit" className="w-full" disabled={isPending}>
         {isPending ? "Signing in..." : "Sign in"}
       </Button>
