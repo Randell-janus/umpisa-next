@@ -2,9 +2,9 @@ import { statusLabels } from "@/lib/format";
 import type { LeaveStatus } from "@/lib/types";
 
 const statusClasses: Record<LeaveStatus, string> = {
-  PENDING: "bg-yellow-100 text-yellow-800",
-  APPROVED: "bg-green-100 text-green-800",
-  REJECTED: "bg-red-100 text-red-800",
+  PENDING: "border border-gray-300 bg-white text-gray-700",
+  APPROVED: "border border-gray-800 bg-gray-800 text-white",
+  REJECTED: "border border-gray-300 bg-gray-100 text-gray-500",
 };
 
 const baseClasses = "inline-block rounded-full px-2.5 py-0.5 text-xs font-medium";
