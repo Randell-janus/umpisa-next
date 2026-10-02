@@ -96,9 +96,9 @@ export const FILE_LEAVE_MUTATION = gql`
   }
 `;
 
-export const PENDING_APPROVALS_QUERY = gql`
-  query PendingApprovals {
-    pendingApprovals {
+export const TEAM_LEAVE_REQUESTS_QUERY = gql`
+  query TeamLeaveRequests($status: LeaveStatus!) {
+    teamLeaveRequests(status: $status) {
       id
       leaveType
       startDate
