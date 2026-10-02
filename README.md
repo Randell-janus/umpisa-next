@@ -56,3 +56,9 @@ All accounts use `password123`. Each employee has 15 VLs and 10 SLs.
 docker compose run --rm backend python manage.py test
 docker compose run --rm --no-deps frontend npm test
 ```
+
+## Snapshots
+
+![My Leaves](employee.png)
+
+![Approvals](manager.png)
