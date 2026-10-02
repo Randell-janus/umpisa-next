@@ -1,4 +1,4 @@
-## Workflows
+# Leave Requests
 
 A **leave management** app. Employees file leaves, managers approve or reject requests.
 
@@ -21,6 +21,11 @@ docker compose up --build
 ```
 
 Runs the migrations and loads demo data automatically. To stop, run `docker compose down`.
+
+| Service | URL |
+| --- | --- |
+| App | http://localhost:3000 |
+| GraphiQL | http://localhost:8000/graphql/ |
 
 ## Dummy data for login
 
