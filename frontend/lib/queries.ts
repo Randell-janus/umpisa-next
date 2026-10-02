@@ -95,3 +95,42 @@ export const FILE_LEAVE_MUTATION = gql`
     }
   }
 `;
+
+export const PENDING_APPROVALS_QUERY = gql`
+  query PendingApprovals {
+    pendingApprovals {
+      id
+      leaveType
+      startDate
+      endDate
+      days
+      reason
+      status
+      createdAt
+      employee {
+        id
+        fullName
+      }
+    }
+  }
+`;
+
+export const APPROVE_LEAVE_MUTATION = gql`
+  mutation ApproveLeave($id: ID!, $note: String) {
+    approveLeave(id: $id, note: $note) {
+      leaveRequest {
+        id
+      }
+    }
+  }
+`;
+
+export const REJECT_LEAVE_MUTATION = gql`
+  mutation RejectLeave($id: ID!, $note: String) {
+    rejectLeave(id: $id, note: $note) {
+      leaveRequest {
+        id
+      }
+    }
+  }
+`;
